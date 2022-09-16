@@ -1,0 +1,97 @@
+---
+title: "Forestfire"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(gridExtra)
+
+setwd("D:/Aislangc2014/Projetos_Rstudio/Initial_information")
+
+df_one <- read.csv("forestfires.csv", header = TRUE)
+df_numerical <- select(df_one, temp, RH, wind, rain)
+df_index <- select(df_one, FFMC, DMC, DC, ISI)
+df_two <- read.csv("temperature.csv", header = TRUE)
+df_two <- na.omit(df_two)
+temp10 <- read.csv("temperature_10.csv", header = TRUE)
+temp50 <- read.csv("temperature_50.csv", header = TRUE)
+temp100 <- read.csv("temperature_100.csv", header = TRUE)
+temp200 <- read.csv("temperature_200.csv", header = TRUE)
+```
+
+# Page One
+
+row {data-width=500}
+-----------------------------------------------------------------------
+
+### Forestfire all
+
+```{r}
+  boxplot(df_numerical,
+      main = 'Variables that influence rainfall intensity',
+      ylab = 'Intensity',
+      xlab = 'Abiotic Variable',
+      col = 'blue'
+      )
+
+```
+
+row {data-width=500}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+boxplot(df_index,
+      main = 'Indices that influence rainfall intensity',
+      ylab = 'Intensity',
+      xlab = 'Abiotic Variable',
+      col = 'green'
+      )
+```
+
+### Chart C
+
+```{r}
+barplot(temp10$N_10,
+      main = 'Temperature',
+      ylab = 'Intensity',
+      col = 'orange'
+      )
+```
+
+### Chart D
+
+```{r}
+barplot(temp50$N_50,
+      main = 'Temperature',
+      ylab = 'Intensity',
+      col = 'orange'
+      )
+```
+
+### Chart E
+
+```{r}
+barplot(temp100$N_100,
+      main = 'Temperature',
+      ylab = 'Intensity',
+      col = 'orange'
+      )
+```
+### Chart F
+
+```{r}
+barplot(temp200$N_200,
+      main = 'Temperature',
+      ylab = 'Intensity',
+      col = 'orange'
+      )
+```
